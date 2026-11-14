@@ -90,7 +90,8 @@ class MediaAnalyzer:
                     # Update media date added with most recent playback date
                     if item.playbacks:
                         most_recent_playback = max(item.playbacks, key=lambda p: p.playback_date)
-                        item.added_date = most_recent_playback.playback_date
+                        if most_recent_playback.playback_date > item.added_date:
+                            item.added_date = most_recent_playback.playback_date
                 
                 # Sort merged media list on date added (oldest first)
                 merged_media_list.sort(key=lambda m: m.added_date)
